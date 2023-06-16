@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { PublicService } from 'src/app/services/Account.service';
 
@@ -7,7 +7,7 @@ import { PublicService } from 'src/app/services/Account.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   username: string = "";
   password: string = "";
@@ -16,9 +16,11 @@ export class LoginComponent {
       private _router : Router,
       private _apiAuth : PublicService
     ){
-      if(this._apiAuth.userData != null){
-        this._router.navigate(['ListUsers'])
-      }
+
+  }
+
+  ngOnInit(){
+    localStorage.clear();
   }
 
   onSubmit() {

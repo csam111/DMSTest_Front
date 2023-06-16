@@ -30,6 +30,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this._router.navigate(['Login']);
   }
 
+  account(){
+    this._router.navigate(['MyAccount']);
+  }
 
 
 }

@@ -31,8 +31,25 @@ export class PublicService {
     this.userSubject = new BehaviorSubject<User>(initialUser);
   }
 
+  isTokenExpired(): boolean {
+    const token = localStorage.getItem('Token');
+    if (token) {
+      const tokenExpiration = this.getTokenExpiration(token);
+      return tokenExpiration < new Date();
+    }
+    return true;
+  }
+
+  private getTokenExpiration(token: string): Date {
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    const expirationDate = new Date(0);
+    expirationDate.setUTCSeconds(tokenPayload.exp);
+    return expirationDate;
+  }
+
+
   AuthenticationUser(User: string, Password: string): Observable<Response> {
-    return this._http.post<Response>(this.url + '/Account', {User, Password}, httpOptions)
+    return this._http.post<Response>(this.url + '/Account', { User, Password }, httpOptions)
       .pipe(
         map(res => {
           if (res.success === 1) {
@@ -44,6 +61,12 @@ export class PublicService {
           return res;
         })
       );
+  }
+
+
+  public logout(): void {
+    localStorage.clear();
+    window.location.reload();
   }
 
   RegistrationUser(User: User): Observable<Response> {

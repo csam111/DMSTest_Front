@@ -1,41 +1,67 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-  <c-container>
-    <c-row class="justify-content-center">
-      <c-col lg="7" md="9" xl="6">
-        <c-card class="mx-4">
-          <c-card-body class="p-4">
-            <form cForm>
-              <h1>Registro</h1>
-              <p class="text-medium-emphasis">Crea una cuenta</p>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
-                <input  [(ngModel)]="username" name="name" autoComplete="name" cFormControl placeholder="Username" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>@</span>
-                <input  [(ngModel)]="email" name="email" autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input  [(ngModel)]="password" name="pass" autoComplete="new-password" cFormControl placeholder="Contrasena" type="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input  [(ngModel)]="password2" name="pass2" autoComplete="new-password" cFormControl placeholder="Repetir Contrasena" type="password" />
-              </c-input-group>
-              <div class="d-grid">
-                <button cButton (click)="onSubmit()" color="success">Crear Cuenta</button>
-              </div>
-            </form>
-          </c-card-body>
-        </c-card>
-      </c-col>
-    </c-row>
-  </c-container>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card shadow" style="width: 400px;">
+    <div class="card-header">
+      Registro
+    </div>
+    <hr>
+    <div class="card-body">
+      <form #customStylesForm="ngForm" (ngSubmit)="onSubmit()" [gutter]="3" [validated]="customValidated" novalidate cForm cRow class="needs-validation">
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input cFormControl name="username" id="validationCustom01" required type="text" class="form-control is-valid" placeholder="Nombre" [(ngModel)]="username" />
+              <div class="valid-feedback"></div>
+              <div class="invalid-feedback">Introduce un nombre</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+              <input cFormControl name="email" id="validationCustomUsername" required type="email" class="form-control is-invalid" placeholder="Correo" [(ngModel)]="email" />
+              <div class="valid-feedback"></div>
+              <div class="invalid-feedback">Introduce un correo válido</div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input cFormControl name="pass" id="validationCustom05" required type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Contraseña" [ngClass]="{'is-invalid': !passwordMatch, 'is-valid': passwordMatch}" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input cFormControl  name="pass2" id="validationCustom06" required type="password" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" [ngClass]="{'is-invalid': !passwordMatch, 'is-valid': passwordMatch}" />
+              <div class="invalid-feedback">Las contraseñas no coinciden o son inválidas</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <small class="text-muted">
+              La contraseña debe tener al menos 8 caracteres y contener al menos un carácter especial (e.g., $, @, !, %, *, ?, &).
+            </small>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12">
+            <button cButton class="me-1" color="primary" type="submit">Registrarse</button>
+            <button (click)="onReset1()" cButton color="secondary" type="reset">Borrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
