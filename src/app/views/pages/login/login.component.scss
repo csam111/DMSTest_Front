@@ -1,0 +1,44 @@
+#layoutAuthentication {
+  min-height: 100vh;
+}
+
+#layoutAuthentication_content {
+  flex: 1 0 auto;
+}
+
+main {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+}
+
+.card {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 1rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  height: 130px;
+}
+
+.btn-primary {
+  border-radius: 30px !important;
+  width: 200px;
+}
+
+#layoutAuthentication {
+  min-height: 100vh;
+  background-image: url('../../../..//assets/img/fondoLogin.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
