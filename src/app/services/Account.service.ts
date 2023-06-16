@@ -10,14 +10,12 @@ const httpOptions = {
     'Content-Type': 'application/json; charset=utf-8 '
   })
 };
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class PublicService {
 
-  url: string = 'https://localhost:7208/api';
+  url: string = 'https://localhost:7208/';
 
   private userSubject : BehaviorSubject<User>
 
@@ -49,7 +47,7 @@ export class PublicService {
 
 
   AuthenticationUser(User: string, Password: string): Observable<Response> {
-    return this._http.post<Response>(this.url + '/Account', { User, Password }, httpOptions)
+    return this._http.post<Response>(this.url + 'api/Account', { User, Password }, httpOptions)
       .pipe(
         map(res => {
           if (res.success === 1) {
@@ -71,7 +69,7 @@ export class PublicService {
 
   RegistrationUser(User: User): Observable<Response> {
     console.log(User)
-    return this._http.post<Response>('https://localhost:7208/CreateUser', User);
+    return this._http.post<Response>(this.url+'CreateUser', User);
   }
 
 

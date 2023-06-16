@@ -40,15 +40,15 @@ export class AdministrationService {
   }
 
   UpdateUser(user: User): Observable<Response> {
-    return this._http.put<Response>('https://localhost:7208/UpdateUser', user);
+    return this._http.put<Response>(this.url +'UpdateUser', user);
   }
 
   UpdatePersonData(user: User): Observable<Response> {
-    return this._http.put<Response>('https://localhost:7208/UpdatePersonalUser', user);
+    return this._http.put<Response>(this.url + 'UpdatePersonalUser', user);
   }
 
   DeleteUser(idUser: number): Observable<Response> {
-    return this._http.delete<Response>(`https://localhost:7208/DeleteUser?idUser=${idUser}`);
+    return this._http.delete<Response>(this.url +`DeleteUser?idUser=${idUser}`);
   }
 
 }
