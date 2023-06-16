@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Response } from '../models/Response'
-import { User } from '../models/Private/User';
+import { User } from 'src/app/models/Public/UserRegister';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,12 +29,18 @@ export class AdministrationService {
     this.userSubject = new BehaviorSubject<User>(initialUser);
   }
 
-
-
   GetUserList(): Observable<Response> {
 
     return this._http.get<Response>(this.url + 'GetListUsers');
 
+  }
+
+  UpdateUser(user: User): Observable<Response> {
+    return this._http.put<Response>('https://localhost:7208/UpdateUser', user);
+  }
+
+  DeleteUser(idUser: number): Observable<Response> {
+    return this._http.delete<Response>(`https://localhost:7208/DeleteUser?idUser=${idUser}`);
   }
 
 }

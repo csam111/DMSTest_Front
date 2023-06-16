@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './containers';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { AuthGuard } from '../app/security/Auth.guard';
 
 const routes: Routes = [
   {
@@ -17,11 +18,13 @@ const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'ListUsers',
+
         loadChildren: () =>
-          import('./views/list-users/list-users.module').then((m) => m.ListUsersModule)
+          import('./views/list-users/list-users.module').then((m) => m.ListUsersModule),
       },
       {
         path: 'pages',
