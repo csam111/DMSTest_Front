@@ -35,8 +35,16 @@ export class AdministrationService {
 
   }
 
+  GetPersonalData(): Observable<Response> {
+    return this._http.get<Response>(this.url + 'GetPersonalData');
+  }
+
   UpdateUser(user: User): Observable<Response> {
     return this._http.put<Response>('https://localhost:7208/UpdateUser', user);
+  }
+
+  UpdatePersonData(user: User): Observable<Response> {
+    return this._http.put<Response>('https://localhost:7208/UpdatePersonalUser', user);
   }
 
   DeleteUser(idUser: number): Observable<Response> {
