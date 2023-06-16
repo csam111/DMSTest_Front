@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   AvatarModule,
@@ -15,34 +15,37 @@ import {
   TabsModule
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { ChartjsModule } from '@coreui/angular-chartjs';
 import { ListUsersComponent } from './list-users.component';
-import {MatTableModule} from '@angular/material/table';
 import { ListUsersRoutingModule } from './list-users.routing.module'
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from 'src/app/security/Jwt.interceptor';
+import { PagesRoutingModule } from '../pages/pages-routing.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { AppComponent } from 'src/app/app.component';
 
 @NgModule({
   imports: [
     ListUsersRoutingModule,
-    HttpClientModule,
-    CardModule,
-    NavModule,
-    IconModule,
-    TabsModule,
     CommonModule,
+    PagesRoutingModule,
+    CardModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatCardModule,
+    ButtonModule,
     GridModule,
-    MatTableModule,
-    ProgressModule,
-    ReactiveFormsModule,
-    ButtonModule,
     FormModule,
-    ButtonModule,
-    ButtonGroupModule,
-    ChartjsModule,
-    AvatarModule,
-    TableModule,
+    IconModule,
+    FormModule
   ],
-  declarations: [ListUsersComponent]
+  declarations: [ListUsersComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true,
+    },
+  ],
+  bootstrap: [AppComponent]
 })
 export class ListUsersModule {
 }

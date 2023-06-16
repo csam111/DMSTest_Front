@@ -20,7 +20,7 @@ export const AuthGuard: CanActivateFn = (
   const user = apiAuth.userData;
 
   if (user == null) {
-    return router.navigate(['Public/Login']);
+    return router.navigate(['Login']);
   }
   else
     return true;

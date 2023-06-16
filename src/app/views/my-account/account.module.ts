@@ -19,6 +19,8 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
 import { MyAccountComponent } from './my-account.component';
 import { AccountRoutingModule } from './account.routing.module'
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from 'src/app/security/Jwt.interceptor';
 
 @NgModule({
   imports: [
@@ -38,9 +40,14 @@ import { FormsModule } from '@angular/forms';
     ChartjsModule,
     AvatarModule,
     TableModule,
-    FormsModule, // Añade esta línea
+    FormsModule,
   ],
-  declarations: [MyAccountComponent]
+  declarations: [MyAccountComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true,
+    },
+  ],
 })
 export class AccountModule {
 }

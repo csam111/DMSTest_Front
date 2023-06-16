@@ -1,0 +1,28 @@
+.styled-table {
+
+  .custom-shadow {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+  }
+
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .button-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

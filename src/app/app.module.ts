@@ -31,7 +31,8 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from 'src/app/security/Jwt.interceptor'
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -75,6 +76,9 @@ const APP_CONTAINERS = [
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true,
     },
     IconSetService,
     Title

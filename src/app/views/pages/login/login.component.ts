@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PublicService } from 'src/app/services/Account.service';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +12,22 @@ export class LoginComponent {
   username: string = "";
   password: string = "";
 
-  constructor(private _router : Router){
-
+  constructor(
+      private _router : Router,
+      private _apiAuth : PublicService
+    ){
+      if(this._apiAuth.userData != null){
+        this._router.navigate(['ListUsers'])
+      }
   }
 
   onSubmit() {
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
+
+    this._apiAuth.AuthenticationUser(this.username, this.password).subscribe(response => {
+      if( response.success === 1){
+        this._router.navigate(['ListUsers']);
+      }
+    });
   }
 
   formRegister(){
